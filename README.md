@@ -9,7 +9,8 @@ Built a few web apps with Next.JS. Goal is to port them to mobile.
 
 | App         | Purpose                     |
 |:-------------|-----------------------------|
-| hello_world | Simple text       |
+| hello_world 			| Simple text       			|
+| nav_swipe 			| Swipe between two screen      |
 
 ### Observations 
 Random things I noticed coming from Next.JS
@@ -19,6 +20,13 @@ Random things I noticed coming from Next.JS
 * [StatusBar](https://reactnative.dev/docs/statusbar)
    * `hidden` hides the top bar 
 * [Expo Component List](https://docs.expo.dev/versions/latest/)
+* [View Component](https://reactnative.dev/docs/view)
+ * the most fundamental building block for creating user interfaces. equivalent of a `<div>` in web development
+ * Flexbox by Default: React Native uses flexbox for all layout. flexDirection defaults to column (unlike the web, where it defaults to row).
+ * No Inherited Styles
+ * Nested, yes
+* Navigation with [React Navigation](https://reactnavigation.org/docs/getting-started/)
+* Have to position the TopNavigator bar manually? That's weird
 
 ### Run
 
