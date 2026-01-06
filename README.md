@@ -11,7 +11,8 @@ Built a few web apps with Next.JS. Goal is to port them to mobile.
 |:-------------|-----------------------------|
 | hello_world 			| Simple text       			|
 | nav_swipe 			| Swipe between two screens      |
-| nav_swipe2 			| Swipe from buttons, go back, rubber-band scroll      |
+| nav_swipe2         | Swipe from buttons, go back, rubber-band scroll      |
+| camera             | use camera + label with [https://moondream.ai/](moondream API)      |
 
 ### Observations 
 Random things I noticed coming from Next.JS
@@ -29,6 +30,7 @@ Random things I noticed coming from Next.JS
 * Navigation with [React Navigation](https://reactnavigation.org/docs/getting-started/)
  * Have to position the TopNavigator bar manually? That's weird
 * [React Navigation Elements](https://reactnavigation.org/docs/elements)
+* I have to implement my own Button component I think, using this one for now `import { Button } from '@react-navigation/elements'`
 
 ### Run
 
