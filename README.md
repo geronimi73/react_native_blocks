@@ -39,13 +39,13 @@ Random things I noticed coming from Next.JS.
    * `hidden` hides the top bar 
 * [Expo Component List](https://docs.expo.dev/versions/latest/)
 * [View Component](https://reactnative.dev/docs/view)
- * the most fundamental building block for creating user interfaces. equivalent of a `<div>` in web development
- * Flexbox by Default: React Native uses flexbox for all layout. flexDirection defaults to column (unlike the web, where it defaults to row).
- * No Inherited Styles
- * Nested, yes
+   * the most fundamental building block for creating user interfaces. equivalent of a `<div>` in web development
+   * Flexbox by Default: React Native uses flexbox for all layout. flexDirection defaults to column (unlike the web, where it defaults to row).
+   * No Inherited Styles
+   * Nested, yes
 * Navigation with [React Navigation](https://reactnavigation.org/docs/getting-started/)
- * Have to position the TopNavigator bar manually? That's weird
-* [React Navigation Elements](https://reactnavigation.org/docs/elements)
+   * Have to position the TopNavigator bar manually? That's weird
+   * [React Navigation Elements](https://reactnavigation.org/docs/elements)
 * I have to implement my own Button component I think, using this one for now `import { Button } from '@react-navigation/elements'`
 
 ### Run
