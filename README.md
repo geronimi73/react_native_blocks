@@ -12,9 +12,12 @@ Built a few web apps with Next.JS. Goal is to port them to mobile.
 | hello_world | Simple text       |
 
 ### Observations 
+Random things I noticed coming from Next.JS
 
 * Basic hello world app from expo template `npx create-expo-app --template expo-template-blank` is 259 MB
 * press Ctrl + D (or shake your device) to open the developer menu
+* [StatusBar](https://reactnative.dev/docs/statusbar)
+   * `hidden` hides the top bar 
 
 ### Run  
 
