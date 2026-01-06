@@ -18,9 +18,15 @@ Why? Built a few web apps with Next.JS. Goal is to port them to mobile.
 
 <table>
   <tr>
+    <td>hello world</td>
+    <td>nav_swipe</td>
+    <td>nav_swipe2</td>
     <td>camera</td>
   </tr>
   <tr>
+    <td><img src="screenshots/hello_world.jpeg" width=200></td>
+    <td><img src="screenshots/nav_swipe.jpeg" width=200></td>
+    <td><img src="screenshots/nav_swipe2.jpeg" width=200></td>
     <td><img src="screenshots/camera.jpeg" width=200></td>
   </tr>
 </table>
