@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "hello_world",
-    "slug": "hello_world",
+    "name": "nav_swipe2",
+    "slug": "nav_swipe2",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
