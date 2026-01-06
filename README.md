@@ -12,7 +12,7 @@ Built a few web apps with Next.JS. Goal is to port them to mobile.
 | hello_world 			| Simple text       			|
 | nav_swipe 			| Swipe between two screens      |
 | nav_swipe2         | Swipe from buttons, go back, rubber-band scroll      |
-| camera             | use camera + label with [https://moondream.ai/](moondream API)      |
+| camera             | use camera + label with [moondream API](https://moondream.ai/)      |
 
 ### Observations 
 Random things I noticed coming from Next.JS
