@@ -10,7 +10,7 @@ Built a few web apps with Next.JS. Goal is to port them to mobile.
 | App         | Purpose                     |
 |:-------------|-----------------------------|
 | hello_world 			| Simple text       			|
-| nav_swipe 			| Swipe between two screen      |
+| nav_swipe 			| Swipe between two screens      |
 
 ### Observations 
 Random things I noticed coming from Next.JS
