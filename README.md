@@ -6,6 +6,16 @@ Built a few web apps with Next.JS. Goal is to port them to mobile.
 * Starting with a very basic Hello World
 * Building up to something I could use in production.
 
+
+| App         | Purpose                     |
+|:-------------|-----------------------------|
+| hello_world | Simple text       |
+
+### Observations 
+
+* Basic hello world app from expo template `npx create-expo-app --template expo-template-blank` is 259 MB
+* press Ctrl + D (or shake your device) to open the developer menu
+
 ### Run  
 
 Testing on iOS
@@ -20,6 +30,3 @@ npx expo start
 
 * Scan QR Code on phone
 
-### Observations 
-
-* Basic hello world app from expo template `npx create-expo-app --template expo-template-blank` is 259 MB
