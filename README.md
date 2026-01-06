@@ -18,8 +18,9 @@ Random things I noticed coming from Next.JS
 * press Ctrl + D (or shake your device) to open the developer menu
 * [StatusBar](https://reactnative.dev/docs/statusbar)
    * `hidden` hides the top bar 
+* [Expo Component List](https://docs.expo.dev/versions/latest/)
 
-### Run  
+### Run
 
 Testing on iOS
 
@@ -28,6 +29,7 @@ Testing on iOS
 * cd into app dir
 
 ```
+npm install expo
 npx expo start
 ```
 
