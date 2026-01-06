@@ -1,10 +1,12 @@
 A collection of minimal apps to get myself started with React Native.
 
-Built a few web apps with Next.JS. Goal is to port them to mobile.
+Why? Built a few web apps with Next.JS. Goal is to port them to mobile.
 
 * One folder for each app.
 * Starting with a very basic Hello World
-* Building up to something I could use in production.
+* Building up to something which might actually be useful.
+
+### Apps
 
 | App         | Purpose                     |
 |:-------------|-----------------------------|
@@ -13,10 +15,15 @@ Built a few web apps with Next.JS. Goal is to port them to mobile.
 | nav_swipe2         | Swipe from buttons, go back, rubber-band scroll      |
 | camera             | use camera + label with [moondream API](https://moondream.ai/)      |
 
- |-------|-------|-------|
- | ![Screenshot 1](screenshots/camera.jpeg) | ![Screenshot 2](path/to/screenshot2.png) | ![Screenshot 3](path/to/screenshot3.png) |
- | ![Screenshot 4](path/to/screenshot4.png) | ![Screenshot 5](path/to/screenshot5.png) | ![Screenshot 6](path/to/screenshot6.png) |
 
+<table>
+  <tr>
+    <td>camera</td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/camera.jpeg" width=200></td>
+  </tr>
+</table>
 
 ### Observations 
 Random things I noticed coming from Next.JS
