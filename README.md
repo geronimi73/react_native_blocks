@@ -28,6 +28,7 @@ Random things I noticed coming from Next.JS
  * Nested, yes
 * Navigation with [React Navigation](https://reactnavigation.org/docs/getting-started/)
  * Have to position the TopNavigator bar manually? That's weird
+* [React Navigation Elements](https://reactnavigation.org/docs/elements)
 
 ### Run
 
