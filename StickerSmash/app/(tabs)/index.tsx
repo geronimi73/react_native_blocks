@@ -7,7 +7,17 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Link } from 'expo-router';
 
+import { env, Tensor } from 'onnxruntime-react-native';
+
 export default function HomeScreen() {
+  // const a = new Tensor()
+  const data = new Float32Array([1.0, 2.0, 3.0, 4.0, 5.0, 6.0]);
+  const shape = [2, 3]; // 2 rows, 3 columns
+  const tensor = new Tensor('float32', data, shape);
+
+  console.log(tensor);
+  // console.log(env)
+
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
