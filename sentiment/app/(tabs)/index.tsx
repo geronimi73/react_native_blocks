@@ -7,16 +7,23 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Link } from 'expo-router';
 
-import { env, Tensor } from 'onnxruntime-react-native';
+// import { env, Tensor } from 'onnxruntime-react-native';
+
+import { Image as Img } from '@/lib/onnxwrapper/image';
+import { Image as ImageRN } from 'react-native';
 
 export default function HomeScreen() {
   // const a = new Tensor()
-  const data = new Float32Array([1.0, 2.0, 3.0, 4.0, 5.0, 6.0]);
-  const shape = [2, 3]; // 2 rows, 3 columns
-  const tensor = new Tensor('float32', data, shape);
-
-  console.log(tensor);
+  // const data = new Float32Array([1.0, 2.0, 3.0, 4.0, 5.0, 6.0]);
+  // const shape = [2, 3]; // 2 rows, 3 columns
+  // const tensor = new Tensor('float32', data, shape);
+  // console.log(tensor);
   // console.log(env)
+
+  const exampleImage = require('@/assets/images/kitten.jpg')
+  const exampleImageUri = ImageRN.resolveAssetSource(exampleImage).uri
+  const img = Img.from_file(exampleImageUri)
+  console.log("Image loaded!")
 
   return (
     <ParallaxScrollView
