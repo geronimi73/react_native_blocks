@@ -1,3 +1,10 @@
 .DS_Store
 camera/.env
 /sentiment/ios
+/mobilenet/node_modules
+/mobilenet/ios
+/mobilenet/.expo
+/mobilenet/.vscode
+/mobilenet/.vscode
+/nb_python
+/mobilenet/.vscode
