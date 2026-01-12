@@ -1,6 +1,5 @@
-// import Canvas from 'canvas'
 import jpeg from 'jpeg-js';
-import {Buffer} from 'buffer';
+import { Buffer } from 'buffer';
 
 let RNFS, Canvas
 try { 
