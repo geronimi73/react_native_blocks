@@ -48,6 +48,20 @@ Random things I noticed coming from Next.JS.
    * [React Navigation Elements](https://reactnavigation.org/docs/elements)
 * I have to implement my own Button component I think, using this one for now `import { Button } from '@react-navigation/elements'`
 
+#### Days 2-4
+* expo is a mess
+* react native is a mess
+* npm creates a mess, every time
+* nothing works
+* delete half of disk including wedding photos to update xcode. delete even more to update ios to update to most recent xcode
+* hello world app finally runs on my phone
+
+#### Day 5
+* Painful realization: transformer.js does not work with react native
+
+#### Day 6
+* Start rewriting transformers.js for react native. Even the most simple things are a pain
+
 ### Run
 
 Testing on iOS
