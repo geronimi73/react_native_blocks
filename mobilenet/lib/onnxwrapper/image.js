@@ -1,21 +1,24 @@
 import jpeg from 'jpeg-js';
 import { Buffer } from 'buffer';
-import fs from 'fs';
 
-let RNFS, Canvas
+let RNFS, Canvas, ort, fs
 try { 
   RNFS = require('react-native-fs'); 
+  ort = require('onnxruntime-react-native')
 } catch(e) {}
 
 if (!RNFS) {
   Canvas = import('canvas')
+  ort = import('onnxruntime-web')
+  // fs = import('fs')
 }
 
 export class Image {
 
-  constructor(width, height, data) { 
+  constructor(width, height, data, channels = 4) { 
     this.width = width; 
     this.height = height; 
+    this.channels = channels
     this.data = data; 
 
     console.log(`New Image (h=${height}, w=${width}, data len=${data.length})`)
@@ -75,6 +78,45 @@ export class Image {
     } else {
       return fs.writeFileSync(path, encoded.data);
     }
+  }
+
+  // async toTensor() {
+  //   ort = await ort
+  //   const { Tensor } = ort
+
+  //   const tensor = new Tensor(
+  //     'uint8',
+  //     new Uint8Array(this.data),
+  //     [this.height, this.width, this.channels]
+  //   );    
+  //   return tensor
+  // }
+
+  async toTensor() {
+    const c = 3, h = this.height, w = this.width;
+    const data = new Float32Array(1 * c * h * w);
+    for (let i = 0; i < h; i++) {
+      for (let j = 0; j < w; j++) {
+        const idx = (i * w + j) * 4;
+        const t_idx = i * w + j;
+        data[t_idx] = this.data[idx] / 255.0;
+        data[h * w + t_idx] = this.data[idx + 1] / 255.0;
+        data[2 * h * w + t_idx] = this.data[idx + 2] / 255.0;
+      }
+    }
+    return new ort.Tensor('float32', data, [1, c, h, w]);
+    // const c = 4, h = this.height, w = this.width;
+    // const data = new Float32Array(1 * c * h * w);
+    // for (let i = 0; i < h; i++) {
+    //   for (let j = 0; j < w; j++) {
+    //     const idx = (i * w + j) * 4;
+    //     const t_idx = i * w + j;
+    //     data[t_idx] = this.data[idx] / 255.0;
+    //     data[c * h * w + t_idx] = this.data[idx + 1] / 255.0;
+    //     data[2 * c * h * w + t_idx] = this.data[idx + 2] / 255.0;
+    //   }
+    // }
+    // return new ort.Tensor('float32', data, [1, c, h, w]);
   }
 
 }

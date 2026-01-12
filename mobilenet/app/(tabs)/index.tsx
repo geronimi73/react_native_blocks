@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import { Image } from 'expo-image';
 import { Platform, StyleSheet } from 'react-native';
 
@@ -10,20 +12,54 @@ import { Link } from 'expo-router';
 // import { env, Tensor } from 'onnxruntime-react-native';
 
 import { Image as Img } from '@/lib/onnxwrapper/image';
+import { load_model } from '@/lib/onnxwrapper/mobilenet';
 import { Image as ImageRN } from 'react-native';
 
 export default function HomeScreen() {
-  // const a = new Tensor()
-  // const data = new Float32Array([1.0, 2.0, 3.0, 4.0, 5.0, 6.0]);
-  // const shape = [2, 3]; // 2 rows, 3 columns
-  // const tensor = new Tensor('float32', data, shape);
-  // console.log(tensor);
-  // console.log(env)
+  function softmax(arr) {
+    const max = Math.max(...arr);
+    const exps = arr.map(x => Math.exp(x - max));
+    const sum = exps.reduce((a,b) => a + b, 0);
+    return exps.map(x => x / sum);
+  }
 
-  const exampleImage = require('@/assets/images/kitten.jpg')
-  const exampleImageUri = ImageRN.resolveAssetSource(exampleImage).uri
-  const img = Img.from_file(exampleImageUri)
-  console.log("Image loaded!")
+  function top_k(arr, k) {
+    return arr.map((v,i) => [v,i]).sort((a,b) => b[0] - a[0]).slice(0,k).map(x => x[1]);
+  }
+
+  async function loadModel() {
+    const model = await load_model()
+    const tensor = await loadImage()
+
+    console.log(tensor.dims, tensor.type);
+    const start = Date.now();
+    const results = await model.run({
+      input: tensor,
+    });
+    // console.log(results)
+    console.log(`model finished in ${(Date.now() - start)/1000} seconds`)
+
+    const probs = softmax(Array.from(results.output.cpuData));
+    const top3 = top_k(probs, 3);
+    console.log(top3);
+  }
+
+  async function loadImage() {
+    const exampleImage = require('@/assets/images/kitten.jpg')
+    const exampleImageUri = ImageRN.resolveAssetSource(exampleImage).uri
+    let img = await Img.from_file(exampleImageUri)
+    img = img.resize(224, 224)
+    const tensor = await img.toTensor()
+    // console.log(tensor)
+    console.log("Image loaded!")
+    return tensor
+  }
+
+
+  useEffect(() => {
+    loadModel()
+  }, []);
+
 
   return (
     <ParallaxScrollView
