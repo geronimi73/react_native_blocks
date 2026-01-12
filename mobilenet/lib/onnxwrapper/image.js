@@ -1,17 +1,7 @@
 import jpeg from 'jpeg-js';
 import { Buffer } from 'buffer';
 
-let RNFS, Canvas, ort, fs
-try { 
-  RNFS = require('react-native-fs'); 
-  ort = require('onnxruntime-react-native')
-} catch(e) {}
-
-if (!RNFS) {
-  Canvas = import('canvas')
-  ort = import('onnxruntime-web')
-  // fs = import('fs')
-}
+import { getOrt, isReactNative } from './ort.js'
 
 export class Image {
 
@@ -25,8 +15,9 @@ export class Image {
   }
   
   static async from_file(path) {
-    if (RNFS) {
+    if (isReactNative) {
       console.log("Using RNFS ")
+      const RNFS = require('react-native-fs'); 
       const localPath = `${RNFS.CachesDirectoryPath}/temp.jpg`;
       await RNFS.downloadFile({ fromUrl: path, toFile: localPath }).promise;
 
@@ -37,7 +28,7 @@ export class Image {
       return new Image(width, height, data);
 
     } else {
-      Canvas = await Canvas
+      const Canvas = await import('canvas')
       const img = await Canvas.loadImage(path);
       const canvas = Canvas.createCanvas(img.width, img.height);
       const ctx = canvas.getContext('2d');
@@ -67,18 +58,20 @@ export class Image {
 
   }
 
-  save(path) {
-    const encoded = jpeg.encode(
-      {width: this.width, height: this.height, data: this.data}, 
-      90
-    );
+  // Not working because rn complains about trying to import node-fs
+  // async save(path) {
+  //   const encoded = jpeg.encode(
+  //     {width: this.width, height: this.height, data: this.data}, 
+  //     90
+  //   );
 
-    if (RNFS) {
-      return RNFS.writeFile(path, encoded.data.toString('base64'), 'base64');
-    } else {
-      return fs.writeFileSync(path, encoded.data);
-    }
-  }
+  //   if (isReactNative) {
+  //     return RNFS.writeFile(path, encoded.data.toString('base64'), 'base64');
+  //   } else {
+  //     const fs = await require("fs");
+  //     return fs.writeFileSync(path, encoded.data);
+  //   }
+  // }
 
   // async toTensor() {
   //   ort = await ort
@@ -93,6 +86,8 @@ export class Image {
   // }
 
   async toTensor() {
+    const ort = await getOrt()
+
     const c = 3, h = this.height, w = this.width;
     const data = new Float32Array(1 * c * h * w);
     for (let i = 0; i < h; i++) {

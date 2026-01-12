@@ -9,10 +9,10 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Link } from 'expo-router';
 
-// import { env, Tensor } from 'onnxruntime-react-native';
-
+import { getOrt } from '@/lib/onnxwrapper/ort';
 import { Image as Img } from '@/lib/onnxwrapper/image';
 import { load_model } from '@/lib/onnxwrapper/mobilenet';
+
 import { Image as ImageRN } from 'react-native';
 
 export default function HomeScreen() {
@@ -55,8 +55,16 @@ export default function HomeScreen() {
     return tensor
   }
 
+  // async function testTensor() {
+  //   const ort = await getOrt()
+
+  //   const inputTensor = new ort.Tensor('float32', new Float32Array([1, 2, 3]), [1, 3]);
+  //   console.log(inputTensor);
+  // }
 
   useEffect(() => {
+    // loadImage()
+    // testTensor()
     loadModel()
   }, []);
 
