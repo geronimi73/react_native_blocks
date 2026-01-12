@@ -12,21 +12,11 @@ import { Link } from 'expo-router';
 import { getOrt } from '@/lib/onnxwrapper/ort';
 import { Image as Img } from '@/lib/onnxwrapper/image';
 import { load_model } from '@/lib/onnxwrapper/mobilenet';
+import { softmax, top_k } from '@/lib/onnxwrapper/utils';
 
 import { Image as ImageRN } from 'react-native';
 
 export default function HomeScreen() {
-  function softmax(arr) {
-    const max = Math.max(...arr);
-    const exps = arr.map(x => Math.exp(x - max));
-    const sum = exps.reduce((a,b) => a + b, 0);
-    return exps.map(x => x / sum);
-  }
-
-  function top_k(arr, k) {
-    return arr.map((v,i) => [v,i]).sort((a,b) => b[0] - a[0]).slice(0,k).map(x => x[1]);
-  }
-
   async function loadModel() {
     const model = await load_model()
     const tensor = await loadImage()
@@ -36,8 +26,7 @@ export default function HomeScreen() {
     const results = await model.run({
       input: tensor,
     });
-    // console.log(results)
-    console.log(`model finished in ${(Date.now() - start)/1000} seconds`)
+    console.log(`model run finished in ${(Date.now() - start)/1000} seconds`)
 
     const probs = softmax(Array.from(results.output.cpuData));
     const top3 = top_k(probs, 3);
@@ -50,21 +39,20 @@ export default function HomeScreen() {
     let img = await Img.from_file(exampleImageUri)
     img = img.resize(224, 224)
     const tensor = await img.toTensor()
-    // console.log(tensor)
-    console.log("Image loaded!")
+    
     return tensor
   }
 
-  // async function testTensor() {
-  //   const ort = await getOrt()
+  async function testTensor() {
+    const ort = await getOrt()
 
-  //   const inputTensor = new ort.Tensor('float32', new Float32Array([1, 2, 3]), [1, 3]);
-  //   console.log(inputTensor);
-  // }
+    const inputTensor = new ort.Tensor('float32', new Float32Array([1, 2, 3]), [1, 3]);
+    console.log(inputTensor);
+  }
 
   useEffect(() => {
     // loadImage()
-    // testTensor()
+    testTensor()
     loadModel()
   }, []);
 
