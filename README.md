@@ -12,6 +12,7 @@ A collection of minimal apps to get myself started with React Native.
 | nav_swipe 			| Swipe between two screens      |
 | nav_swipe2         | Swipe from buttons, go back, rubber-band scroll      |
 | camera             | use camera + label with [moondream API](https://moondream.ai/)      |
+| mobilenet          | local [mobilenet](https://github.com/onnx/models/tree/main/validated/vision/classification/mobilenet) inference w/ onnxruntime      |
 
 
 <table>
@@ -26,6 +27,18 @@ A collection of minimal apps to get myself started with React Native.
     <td><img src="screenshots/nav_swipe.jpeg" width=200></td>
     <td><img src="screenshots/nav_swipe2.jpeg" width=200></td>
     <td><img src="screenshots/camera.jpeg" width=200></td>
+  </tr>
+  <tr>
+    <td>mobilenet</td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><img src="screenshots/mobilenet.jpeg" width=200></td>
+    <td></td>
+    <td></td>
+    <td></td>
   </tr>
 </table>
 
@@ -61,6 +74,7 @@ Random things I noticed coming from Next.JS.
 
 #### Day 6
 * Start rewriting transformers.js for react native. Even the most simple things are a pain
+* Add `mobilenet`: img classification (imagenet) w/ onnxruntime, image picker
 
 ### Run
 
