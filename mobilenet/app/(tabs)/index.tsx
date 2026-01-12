@@ -13,6 +13,7 @@ import { getOrt } from '@/lib/onnxwrapper/ort';
 import { Image as Img } from '@/lib/onnxwrapper/image';
 import { load_model } from '@/lib/onnxwrapper/mobilenet';
 import { softmax, top_k } from '@/lib/onnxwrapper/utils';
+import { imagenet_classes } from '@/lib/onnxwrapper/in_classes.js';
 
 import { Image as ImageRN } from 'react-native';
 
@@ -30,7 +31,11 @@ export default function HomeScreen() {
 
     const probs = softmax(Array.from(results.output.cpuData));
     const top3 = top_k(probs, 3);
-    console.log(top3);
+    // console.log(top3);
+    top3.map((idx)=>{
+      console.log(imagenet_classes[idx])
+    })
+
   }
 
   async function loadImage() {
