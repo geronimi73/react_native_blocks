@@ -1,8 +1,7 @@
-import { getOrt, isReactNative } from './ort.js'
+import { ort, isReactNative } from './ort'
 
 export async function load_model() {
   const onnxPath = "assets/models/mobilenetv2-12.onnx"
-  const ort = await getOrt()
   let ortPath
 
   if (isReactNative) {

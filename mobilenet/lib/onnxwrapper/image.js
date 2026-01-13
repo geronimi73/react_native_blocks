@@ -1,7 +1,9 @@
+console.log("IMAGE.JS LOADED");
+
 import jpeg from 'jpeg-js';
 import { Buffer } from 'buffer';
 
-import { getOrt, isReactNative } from './ort.js'
+import { ort, isReactNative } from './ort'
 
 export class Image {
 
@@ -86,8 +88,6 @@ export class Image {
   // }
 
   async toTensor() {
-    const ort = await getOrt()
-
     const c = 3, h = this.height, w = this.width;
     const data = new Float32Array(1 * c * h * w);
     for (let i = 0; i < h; i++) {

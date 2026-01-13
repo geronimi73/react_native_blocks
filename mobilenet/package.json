@@ -32,6 +32,7 @@
     "expo-symbols": "~1.0.8",
     "expo-system-ui": "~6.0.9",
     "expo-web-browser": "~15.0.10",
+    "extensionless": "^2.0.6",
     "jpeg-js": "^0.4.4",
     "onnxruntime-react-native": "^1.23.2",
     "onnxruntime-web": "^1.23.2",

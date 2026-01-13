@@ -114,14 +114,14 @@ export default function HomeScreen() {
           modelLoading &&
           <View style={styles.modelLoadingContainer}>
             <ActivityIndicator />
-            <Text style={styles.defaultText}>Loading Model</Text>
+            <ThemedText>Loading Model</ThemedText>
           </View>
         }
         { 
           modelRunning &&
           <View style={styles.modelLoadingContainer}>
             <ActivityIndicator />
-            <Text style={styles.defaultText}>Processing image</Text>
+            <ThemedText>Processing image</ThemedText>
           </View>
         }
         { !image && <Button title="Press me" onPress={pickImage}/> }
@@ -134,7 +134,7 @@ export default function HomeScreen() {
       </View>
       <View style={styles.classContainer}>
         {classes.map((item, index) => (
-          <Text key={index} style={styles.defaultText}>{item.substring(item.indexOf(" ") + 1)}</Text>
+          <ThemedText key={index}>{item.substring(item.indexOf(" ") + 1)}</ThemedText>
         ))}
 
       </View>
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     height: 200,
   },
   defaultText: {
-    color: 'white',
+    // color: 'white',
   },
   mainContainer: {
     alignItems: 'center',
