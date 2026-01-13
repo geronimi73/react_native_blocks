@@ -1,4 +1,4 @@
-import { Image } from '../lib/onnxwrapper/image.js';
+import { Image } from 'tensor.rn';
 
 async function testImage() {
 	let img = await Image.from_file("assets/images/kitten.jpg")

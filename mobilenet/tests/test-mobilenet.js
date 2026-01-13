@@ -1,19 +1,16 @@
-import { load_model } from '../lib/onnxwrapper/mobilenet.js';
-import { Image as Img } from '../lib/onnxwrapper/image.js';
+import { MobileNet } from 'tensor.rn/models';
+import { Image } from 'tensor.rn';
+import { softmax, top_k } from 'tensor.rn/utils';
+
 import { imagenet_classes } from '../lib/onnxwrapper/in_classes.js';
-import { softmax, top_k } from '../lib/onnxwrapper/utils.js';
 
 async function testInference() {
-  const model = await load_model()
+  const img = await Image.from_file("assets/images/kitten.jpg")
+  const model = new MobileNet("assets/models/mobilenetv2-12.onnx")
+  await model.load()
+  const results = await model.predict(img)
 
-  let img = await Img.from_file("assets/images/kitten.jpg")
-  img = img.resize(224, 224)
-  const imgTensor = await img.toTensor()
-  const results = await model.run({
-    input: imgTensor,
-  });
-
-  const probs = softmax(Array.from(results.output.cpuData));
+  const probs = softmax(Array.from(results.ort_tensor.cpuData));
   const top3 = top_k(probs, 3);
 
   top3.map((idx)=>{

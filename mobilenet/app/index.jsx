@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
 import { Button, View, Text, Platform, StyleSheet, Image, ActivityIndicator, TouchableHighlight } from 'react-native';
+import { CachesDirectoryPath, downloadFile } from 'react-native-fs';
 
-// import { Image } from 'expo-image';
 import * as ImagePicker from 'expo-image-picker';
 
 import { HelloWave } from '@/components/hello-wave';
@@ -11,9 +11,9 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { Link } from 'expo-router';
 
-import { Image as Img } from '@/lib/onnxwrapper/image';
-import { load_model } from '@/lib/onnxwrapper/mobilenet';
-import { softmax, top_k } from '@/lib/onnxwrapper/utils';
+import { Image as Img } from 'tensor.rn';
+import { MobileNet } from 'tensor.rn/models';
+import { softmax, top_k } from 'tensor.rn/utils';
 import { imagenet_classes } from '@/lib/onnxwrapper/in_classes.js';
 
 export default function HomeScreen() {
@@ -27,23 +27,26 @@ export default function HomeScreen() {
   async function loadModel() {
     setModelLoading(true)
     let start = Date.now();
-    const model_ = await load_model()
+
+    const assetPath = require("../assets/models/mobilenetv2-12.onnx")
+    const assetPathUri = Image.resolveAssetSource(assetPath).uri
+    const localPath = `${CachesDirectoryPath}/model.onnx`;
+    await downloadFile({fromUrl: assetPathUri, toFile: localPath}).promise;
+
+    const model_ = await new MobileNet(localPath)
+    await model_.load()
     console.log(`model load finished in ${(Date.now() - start)/1000} seconds`)
 
     setModel(model_)
     setModelLoading(false)
   }
 
-  async function runModel(tensor) {
-    // const tensor = await loadImage()
-    console.log(tensor.dims, tensor.type);
+  async function runModel(img) {
     const start = Date.now();
-    const results = await model.run({
-      input: tensor,
-    });
+    const results = await model.predict(img)
     console.log(`model run finished in ${(Date.now() - start)/1000} seconds`)
 
-    const probs = softmax(Array.from(results.output.cpuData));
+    const probs = softmax(Array.from(results.ort_tensor.cpuData));
     const top3 = top_k(probs, 3);
     // console.log(top3);
     // top3.map((idx)=>{
@@ -60,10 +63,8 @@ export default function HomeScreen() {
       uri = exampleImageUri
     }
     let img = await Img.from_file(uri)
-    img = img.resize(224, 224)
-    const tensor = await img.toTensor()
     
-    return tensor
+    return img
   }
 
   const pickImage = async () => {
@@ -88,8 +89,8 @@ export default function HomeScreen() {
 
       setImage(imgUri)
       setModelRunning(true)
-      const imgTensor = await loadImage(imgUri)
-      await runModel(imgTensor)
+      const img = await loadImage(imgUri)
+      await runModel(img)
       setModelRunning(false)
     }
   };
