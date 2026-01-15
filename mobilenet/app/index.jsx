@@ -13,8 +13,7 @@ import { Link } from 'expo-router';
 
 import { Image as Img } from 'tensor.rn';
 import { MobileNet } from 'tensor.rn/models';
-import { softmax, top_k } from 'tensor.rn/utils';
-import { imagenet_classes } from '@/lib/onnxwrapper/in_classes.js';
+import { IN1kClasses } from 'tensor.rn/data';
 
 export default function HomeScreen() {
   const [image, setImage] = useState(null);
@@ -43,16 +42,14 @@ export default function HomeScreen() {
 
   async function runModel(img) {
     const start = Date.now();
-    const results = await model.predict(img)
+    const results = (await model.predict(img)).softmax()
     console.log(`model run finished in ${(Date.now() - start)/1000} seconds`)
 
-    const probs = softmax(Array.from(results.ort_tensor.cpuData));
-    const top3 = top_k(probs, 3);
-    // console.log(top3);
-    // top3.map((idx)=>{
-    //   console.log(imagenet_classes[idx])
-    // })
-    const top3Classes = top3.map((idx)=>imagenet_classes[idx])
+    const top3 = results.topk(3)
+    const top3Classes = top3.map((idx) => {
+      return IN1kClasses[idx] + ` (p=${results.data[idx].toFixed(2)})`
+    })
+
     setClasses(top3Classes)
   }
 
