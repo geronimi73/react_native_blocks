@@ -10,3 +10,4 @@ camera/.env
 /mobilenet/.vscode
 /sam/.expo
 /sam/node_modules
+/sam/ios
