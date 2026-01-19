@@ -78,16 +78,22 @@ Random things I noticed coming from Next.JS.
 
 ### Run
 
+#### Expo Go
 Testing on iOS
 
 * Install "Expo Go"
 
 * cd into app dir
 
-```
+```bash
 npm install expo
 npx expo start
 ```
 
 * Scan QR Code on phone
 
+#### iOS
+
+```bash
+npx expo run:ios --device
+```
