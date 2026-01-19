@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "StickerSmash",
-    "slug": "StickerSmash",
+    "name": "MobileNet",
+    "slug": "MobileNet",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -10,7 +10,7 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.geronimo7.StickerSmash"
+      "bundleIdentifier": "com.geronimo7.MobileNet"
     },
     "android": {
       "adaptiveIcon": {
@@ -21,7 +21,7 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.geronimo7.StickerSmash"
+      "package": "com.geronimo7.MobileNet"
     },
     "web": {
       "output": "static",
