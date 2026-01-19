@@ -8,3 +8,5 @@ camera/.env
 /mobilenet/.vscode
 /nb_python
 /mobilenet/.vscode
+/sam/.expo
+/sam/node_modules
